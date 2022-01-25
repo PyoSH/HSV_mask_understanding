@@ -19,7 +19,7 @@
 
 void on_mouse_HSV(int event, int x, int y, int flags, void*);
 void on_mouse_CRDN(int event, int x, int y, int flags, void*);
-// void on_change(int, int,int, int,int, int);
+
 
 using namespace cv;
 using namespace std;
@@ -79,14 +79,6 @@ int main(int argc, char **argv)
         // mouse func
         setMouseCallback("Masked_window", on_mouse_HSV); setMouseCallback("COORDINATE_window", on_mouse_CRDN);
 
-        // trackbar func: I want to Init by origin hsv, not (0,0,0)
-        // createTrackbar("H_low","HSV_window",&H_low,179, on_H_change, (void*)&channels[0]);
-        // createTrackbar("H_high","HSV_window",&H_high,179, on_H_change, (void*)&channels[0]);
-        // createTrackbar("S_low","HSV_window",&S_low,255, on_S_change, (void*)&channels[1]);
-        // createTrackbar("S_high","HSV_window",&S_high,255, on_S_change, (void*)&channels[1]);
-        // createTrackbar("V_low","HSV_window",&V_low,255, on_V_change, (void*)&channels[2]);
-        // createTrackbar("V_high","HSV_window",&V_high,255, on_V_change, (void*)&channels[2]);
-
         createTrackbar("H_low","Masked_window",&H_low,179);
         createTrackbar("H_high","Masked_window",&H_high,179);
         createTrackbar("S_low","Masked_window",&S_low,255);
@@ -134,71 +126,3 @@ void on_mouse_CRDN(int event, int x, int y, int flags, void*){
         cout << "[ COORDINATE ] [X: " << x<<"] [Y: "<<y <<"]"<<endl;
     }
 }
-
-
-// void on_change(int H_low, int H_high,int S_low, int S_high,int V_low, int V_high){
-//     Scalar lowb(H_low, S_low, V_low);
-//     Scalar highb(H_high, S_high, V_high);
-
-//     HSVthreshold(0, lowb, highb,0);
-// }
-
-// mask each H,S,V channel
-// void on_H_change(int &H_low, int &H_high, void* userdata){
-//     Scalar lowb(H_low, S_low, V_low);
-//     Scalar highb(H_high, S_high, V_high);
-
-//     // Mat src = *(Mat*)userdata;
-//     // channels[0] = hue+src; 
-
-//     HSVthreshold(userdata, lowb, highb,0);
-//     // Mat dst = src + (hue - src);
-    
-//     // Mat dst = hue+src; 
-    
-//     // merge(channels, img_test);
-//     imshow("HSV_window",masked_img);    
-// }
-
-// void on_S_change(int sat, void* userdata){
-//     // Scalar lowb(H_low, S_low, V_low);
-//     // Scalar highb(H_high, S_high, V_high);
-    
-
-//     // Mat src = *(Mat*)userdata;
-//     // channels[1] = sat+src; 
-    
-//     // channels[1] += (sat-src);
-    
-
-//     // merge(channels, vid2);
-//     // merge(chn_previous, vid2);
-//     imshow("HSV_window",masked_img);    
-// }
-
-// void on_V_change(int val, void* userdata){
-
-//     // Scalar lowb(H_low, S_low, V_low);
-//     // Scalar highb(H_high, S_high, V_high);
-//     split (channels, vid2);
-//     Mat src = *(Mat*)userdata;
-//     channels[2] = val+src; 
-    
-//     // channels[2] += (val-src);
-    
-
-//     // for(int j=0; j<vid2.rows; j++){
-//     //     for (int i=0; i< vid2.cols; i++){
-//     //         int v = vid2.at<Vec3b>(j,i)[2] + (val-vid2.at<Vec3b>(j,i)[2]) ;
-//     //         vid2.at<Vec3b>(j,i)[2] = v > 255 ? 255 : v< 0 ? 0: v;
-//     //     }
-//     // }
-
-//     // vid2.setTo(Scalar(slider_H, slider_S, val));
-//     // cvtColor(vid2,vid1,COLOR_HSV2BGR);
-//     // chn_previous[2] = channels[2];
-
-//     merge(channels, vid2);
-//     // merge(chn_previous, vid2);
-//     imshow("HSV_window",vid2);    
-// }
